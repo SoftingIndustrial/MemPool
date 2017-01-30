@@ -1,0 +1,13 @@
+MemPool library
+===============
+
+
+The MemPool library is a stand-alone memory allocation library.
+It is intended to either simulate low memory targets on windows
+or linux, or to completely replace the system memory management.
+
+It is based on the memory management code from the eCos operating
+system, which was cut free from the environment so it can freely be
+used on windows and linux.
+
+It is re-published under the eCos licence.
