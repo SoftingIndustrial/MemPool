@@ -1,9 +1,11 @@
+/*==========================================================================
+//
 // This file is part of the MemPool library.
-// Copyright (C) 2017 Free Software Foundation, Inc.
+// Copyright (C) 2017 Bernd Edlinger
 //
 // MemPool is free software; you can redistribute it and/or modify it under
 // the terms of the GNU General Public License as published by the Free
-// Software Foundation; either version 2 or (at your option) any later
+// Software Foundation; either version 3 or (at your option) any later
 // version.
 //
 // This program is distributed in the hope that it will be useful, but WITHOUT
@@ -21,16 +23,18 @@
 // this file does not by itself cause the resulting work to be covered by
 // the GNU General Public License.  However the source code for this file
 // must still be made available in accordance with section (3) of the GNU
-// General Public License v2.
+// General Public License v3.
 //
 // This exception does not invalidate any other reasons why a work based
 // on this file might be covered by the GNU General Public License.
-#ifndef CYGONCE_MEMALLOC_COMMON_H
-#define CYGONCE_MEMALLOC_COMMON_H
+//
+//========================================================================*/
+#ifndef MEMPOOL_MPCOMMON_H
+#define MEMPOOL_MPCOMMON_H
 
 /*==========================================================================
 //
-//      common.h
+//      mpcommon.h
 //
 //      Shared definitions used by memory allocators
 //
@@ -41,8 +45,6 @@
 // Contributors: Bernd Edlinger
 // Date:         2000-06-12
 // Purpose:      Shared definitions used by memory allocators
-// Description:
-// Usage:        #include <cyg/memalloc/common.hxx>
 //
 //
 //####DESCRIPTIONEND####
@@ -136,5 +138,5 @@ struct Cyg_Mempool_Status {
               | CYG_MEMPOOL_STAT_ORIGSIZE       \
               | CYG_MEMPOOL_STAT_MAXOVERHEAD )
 
-#endif /* ifndef CYGONCE_MEMALLOC_COMMON_H */
-/* EOF common.h */
+#endif /* ifndef MEMPOOL_MPCOMMON_H */
+/* EOF mpcommon.h */

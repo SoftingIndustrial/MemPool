@@ -1,13 +1,78 @@
-MemPool library
-===============
+MemPool library 1.0
+===================
 
 
 The MemPool library is a stand-alone memory allocation library.
-It is intended to either simulate low memory targets on windows
-or linux, or to completely replace the system memory management.
+It is a block allocator library that uses a single fixed size memory
+pool to allocate variable sized memory blocks, and exports functions
+similar to malloc, realloc and free.
+It is intended to either simulate low memory targets on GNU/Linux and
+other systems, or to completely replace the system memory management.
 
 It is based on the memory management code from the eCos operating
 system, which was cut free from the environment so it can freely be
-used on windows and linux.
+used on GNU/Linux and other systems.
 
 It is re-published under the eCos licence.
+
+
+How to build
+============
+
+GNU/Linux:
+
+cd ./build
+../MemPool/configure
+make && make test
+
+Windows:
+
+cd .\build
+cmake ..\MemPool
+cmake --build .
+
+
+How to use
+==========
+
+The include file "mempool.h" contains all exported functions.
+All functions in this library are thread-safe.
+
+
+cyg_bool MemPool_init(cyg_uint32)
+
+- takes the requested size in bytes of the memory pool (up to 2GB)
+  and returns true on success false if not enough memory.
+- call this function always first.
+
+
+void MemPool_exit(void)
+
+- shuts the MemPool library down.
+- all previously allocated memory gets released to the O/S.
+- call this function optionally on shutdown.
+
+
+void MemPool_get_status(cyg_uint32 flags, struct Cyg_Mempool_Status* status)
+
+- returns current status about MemPool.
+- flags is CYG_MEMPOOL_STAT_ALL or a combination of CYG_MEMPOOL_STAT_XXX (see mpcommon.h).
+- *status is filled on return, and contains different usage statistics.
+
+
+void* MemPool_Memory_Alloc_Func(cyg_uint32 size)
+
+- allocates a variable sized memory block out of the MemPool.
+- can be used to replace the malloc function.
+
+
+void* MemPool_Memory_ReAlloc_Func(void* mem, cyg_uint32 new_size)
+
+- reallocates a variable sized memory block out of the MemPool.
+- can be used to replace the realloc function.
+
+
+void  MemPool_Memory_Free_Func(void* mem)
+
+- releases a variable sized memory block.
+- can be used to replace the free function.
