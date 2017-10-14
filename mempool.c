@@ -22,7 +22,7 @@
 // and link it with other works to produce a work based on this file,
 // this file does not by itself cause the resulting work to be covered by
 // the GNU General Public License.  However the source code for this file
-// must still be made available in accordance with section (3) of the GNU
+// must still be made available in accordance with section (6) of the GNU
 // General Public License v3.
 //
 // This exception does not invalidate any other reasons why a work based
