@@ -1,0 +1,121 @@
+@settitle MemPool library
+@node Top
+@top Top
+
+The MemPool library is a stand-alone memory allocation library.
+It is a block allocator library that uses a single fixed size memory
+pool to allocate variable sized memory blocks, and exports functions
+similar to malloc, realloc and free.
+It is intended to either simulate low memory targets on GNU/Linux and
+other systems, or to completely replace the system memory management.
+
+It is based on the memory management code from the eCos operating
+system, which was cut free from the environment so it can freely be
+used on GNU/Linux and other systems.
+
+It is re-published under the eCos licence.
+
+@menu
+* Building MemPool: How to build
+* Using MemPool: How to use
+* Copying: Copying
+@end menu
+
+@node How to build
+
+Building MemPool:
+
+GNU/Linux:
+
+@smallexample
+cd ./build
+../MemPool/configure
+make && make test
+@end smallexample
+
+Windows:
+
+@smallexample
+cd .\build
+cmake ..\MemPool
+cmake --build .
+@end smallexample
+
+
+@node How to use
+
+Using MemPool:
+
+The include file "mempool.h" contains all exported functions.
+All functions in this library are thread-safe.
+
+
+cyg_bool MemPool_init(cyg_uint32)
+
+This function takes the requested size in bytes of the memory pool (up to 2GB)
+and returns true on success false if not enough memory.
+Call this function always first.
+
+
+void MemPool_exit(void)
+
+This function shuts the MemPool library down.
+All previously allocated memory gets released to the O/S.
+Call this function optionally on shutdown.
+
+
+void MemPool_get_status(cyg_uint32 flags, struct Cyg_Mempool_Status* status)
+
+This function returns current status about MemPool.
+The parameter flags is CYG_MEMPOOL_STAT_ALL or a combination of CYG_MEMPOOL_STAT_XXX (see mpcommon.h).
+*status is filled on return, and contains different usage statistics.
+
+
+void* MemPool_Memory_Alloc_Func(cyg_uint32 size)
+
+This function allocates a variable sized memory block out of the MemPool.
+It can be used to replace the malloc function.
+
+
+void* MemPool_Memory_ReAlloc_Func(void* mem, cyg_uint32 new_size)
+
+This function reallocates a variable sized memory block out of the MemPool.
+It can be used to replace the realloc function.
+
+
+void  MemPool_Memory_Free_Func(void* mem)
+
+This function releases a variable sized memory block.
+It can be used to replace the free function.
+
+@node Copying
+
+This file is part of the MemPool library.
+Copyright @copyright{} 2017 Bernd Edlinger
+
+MemPool is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free
+Software Foundation; either version 3 or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+As a special exception, if other files instantiate templates or use
+macros or inline functions from this file, or you compile this file
+and link it with other works to produce a work based on this file,
+this file does not by itself cause the resulting work to be covered by
+the GNU General Public License.  However the source code for this file
+must still be made available in accordance with section (6) of the GNU
+General Public License v3.
+
+This exception does not invalidate any other reasons why a work based
+on this file might be covered by the GNU General Public License.
+
+@bye
